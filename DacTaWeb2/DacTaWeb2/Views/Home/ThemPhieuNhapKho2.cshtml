@@ -1,0 +1,111 @@
+﻿@model DacTaWeb2.Models.Phieunhapkho
+
+@{
+    ViewData["Title"] = "ThemPhieuNhapKho2";
+    Layout = "~/Views/Shared/_LayoutNhapKho.cshtml";
+}
+
+<style>
+    *{
+        font-family: Arial !important;
+    }
+    .card-PNK{
+        background: #da8cff !important;
+        color: white !important;
+        border-radius: 8px;
+        height: fit-content;
+        padding: 20px !important;
+    }
+
+    .card-CTPNK{
+        background: white !important;
+        border-radius: 8px;
+        height: fit-content;
+        margin-left: 30px !important;
+        padding: 20px !important;
+    }
+
+    .form-CTPNK{
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .form-CTPNK .form-group{
+        width: 30%;
+    }
+
+</style>
+
+<div class="row">
+    <div class="col-md-3 card-PNK">
+        <p style="font-size: 20pt">Phiếu nhập kho</p>
+        <form asp-action="ThemPhieuNhapKho2" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="IdNcc" class="control-label"></label>
+                <select asp-for="IdNcc" style="line-height: 30px" class="form-control" asp-items="ViewBag.IdNcc"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdNv" class="control-label"></label>
+                <select asp-for="IdNv" style="line-height: 30px" class="form-control" asp-items="ViewBag.IdNv"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Thoigian" class="control-label"></label>
+                <input asp-for="Thoigian" class="form-control" />
+                <span asp-validation-for="Thoigian" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Mota" class="control-label"></label>
+                <input asp-for="Mota" class="form-control" />
+                <span asp-validation-for="Mota" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Trangthai" class="control-label"></label>
+                <input asp-for="Trangthai" class="form-control" />
+                <span asp-validation-for="Trangthai" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="margin-bottom: 0">
+                <input type="submit" value="Lưu phiếu nhập kho" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+    <div class="col-md-8 card-CTPNK">
+        <p style="font-size: 20pt">Chi tiết phiếu nhập kho</p>
+        <form class="form-CTPNK" id="formThemChiTiet">
+            <div class="form-group">
+                <label for="exampleInputName1">Tên sản phẩm</label>
+                <input type="text" class="form-control" id="exampleInputName1">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail3">Số lượng</label>
+                <input type="text" class="form-control" id="exampleInputEmail3">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword4">Giá nhập</label>
+                <input type="text" class="form-control" id="exampleInputPassword4">
+            </div>
+        </form>
+        <button type="submit" class="btn btn-gradient-success me-2 btn-them" onclick="WarnAddPNK()">Thêm chi tiết phiếu nhập kho</button>
+        <p style="margin-top:20px; font-size: 15pt">Danh sách chi tiết phiếu nhập kho</p>
+        <div id="divDanhSachChiTiet">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th> Tên sản phẩm </th>
+                        <th> Số lượng </th>
+                        <th> Giá nhập </th>
+                        <th> Tổng tiền </th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+<script>
+    function WarnAddPNK() {
+        var message = "Bạn cần lưu phiếu nhập kho trước!";
+        alert(message);
+    }
+</script>
+

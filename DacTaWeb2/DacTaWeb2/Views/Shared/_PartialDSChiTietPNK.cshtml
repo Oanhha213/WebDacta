@@ -1,0 +1,46 @@
+﻿@model DacTaWeb2.Models.ViewModels.NhapKhoViewModel
+@using DacTaWeb2.Models.ViewModels
+@*
+
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th> Tên sản phẩm </th>
+            <th> Số lượng </th>
+            <th> Giá nhập </th>
+            <th> Tổng tiền </th>
+            <th>Thao tác</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @if (Model != null)
+        {
+            if (Model.Chitietpnks != null)
+            {
+                foreach (var chiTiet in Model.Chitietpnks)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => chiTiet.TenSp)</td>
+                        <td>@Html.DisplayFor(modelItem => chiTiet.Soluong)</td>
+                        <td>@Html.DisplayFor(modelItem => chiTiet.GiaNhap)</td>
+                        <!-- Bỏ đi cột tổng tiền vì nó sẽ được trigger tự động tính -->
+                        <td>
+                            <a class="btn-danger" style="width: 55px; padding:10px 0; display: inline-block; margin: 5px; border-radius: 6px; cursor: pointer">Xoá</a>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <p>Không có dữ liệu chi tiết.</p>
+            }
+        }
+        else
+        {
+            <p>Model là null.</p>
+        }
+    </tbody>
+</table>
+*@

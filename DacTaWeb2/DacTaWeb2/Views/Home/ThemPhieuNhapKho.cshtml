@@ -1,0 +1,141 @@
+﻿@model DacTaWeb2.Models.Phieunhapkho
+
+@{
+    ViewData["Title"] = "ThemPhieuNhapKho";
+    Layout = "~/Views/Shared/_LayoutNhapKho.cshtml";
+}
+
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+<style>
+    * {
+        font-family: Arial !important;
+    }
+
+    .table {
+        margin-right: 20px;
+        margin-bottom: 20px;
+    }
+
+    .card-body {
+        background: #da8cff;
+        color: white;
+        border-radius: 8px;
+        height: fit-content;
+    }
+
+    .form-CTPNK {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
+
+    .btn-them {
+        padding: 14px 20px;
+    }
+
+    p {
+        margin-bottom: 20px;
+    }
+
+    th {
+        background: #da8cff !important;
+        color: white;
+    }
+
+    .form-CTPNK .form-group {
+        width: 30%;
+        margin-bottom: 0 !important;
+    }
+
+    .card-title {
+        margin-bottom: 20px;
+    }
+</style>
+
+
+<div>
+    @*<form class="forms-sample">*@
+        <div style="display: flex; margin-bottom: 20px">
+            <div class="card-body">
+            <p style="font-size: 20pt">Phiếu nhập kho</p>
+            <form class="forms-sample" asp-action="ThemPhieuNhapKho" id="formPhieuNhapKho" method="post">
+                <div class="form-group">
+                    <label asp-for="IdNv" class="control-label"></label>
+                    <select asp-for="IdNv" class="form-control" asp-items="ViewBag.IdNv"></select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Mota" class="control-label"></label>
+                    <input asp-for="Mota" class="form-control"/>
+                    <span asp-validation-for="Mota" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Thoigian" class="control-label"></label>
+                    <input asp-for="Thoigian" class="form-control" />
+                    <span asp-validation-for="Thoigian" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Trangthai" class="control-label"></label>
+                    <input asp-for="Trangthai" class="form-control" />
+                    <span asp-validation-for="Trangthai" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="IdNcc" class="control-label"></label>
+                    <select asp-for="IdNcc" class="form-control" asp-items="ViewBag.IdNcc"></select>
+                </div>
+                <button type="submit" class="btn btn-gradient-success me-2">Lưu phiếu nhập kho</button>
+            </form>
+        </div>
+            <div style="width:75%; background: white; border-radius: 8px; margin-left: 20px; padding: 20px; height: fit-content;">
+                <p style="margin-top:20px">Danh sách chi tiết phiếu nhập kho</p>
+                <form class="form-CTPNK" id="formThemChiTiet">
+                    <div class="form-group">
+                        <label for="exampleInputName1">Tên sản phẩm</label>
+                        <input type="text" class="form-control" id="exampleInputName1">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail3">Số lượng</label>
+                        <input type="text" class="form-control" id="exampleInputEmail3">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword4">Đơn giá</label>
+                        <input type="text" class="form-control" id="exampleInputPassword4">
+                    </div>
+                    <button type="submit" class="btn btn-gradient-success me-2 btn-them">Thêm chi tiết phiếu nhập kho</button>
+                </form>
+                <button type="submit" class="btn btn-gradient-success me-2 btn-them" id="btnThemChiTietPhieuNhap">Thêm chi tiết phiếu nhập kho</button>
+                <p style="margin-top:20px">Danh sách chi tiết phiếu nhập kho</p>
+                <div id="divDanhSachChiTiet">
+                    <table id="tblChiTiet">
+                        <!-- Header Bảng -->
+                        <thead>
+                            <tr>
+                                <th>Tên Sản Phẩm</th>
+                                <th>Số Lượng</th>
+                                <th>Đơn Giá</th>
+                                <th>Tổng Tiền</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <!-- Dữ Liệu Bảng -->
+                        <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    @*</form>*@
+</div>
+
+
+

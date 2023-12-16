@@ -1,0 +1,151 @@
+﻿
+@{
+    ViewData["Title"] = "TestForm";
+    Layout = "~/Views/Shared/_LayoutNhapKho.cshtml";
+}
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<style>
+    *{
+        font-family: Arial !important;
+    }
+    .table{
+        margin-right: 20px;
+    }
+    .card-body{
+        background: #da8cff;
+        color: white;
+        border-radius: 8px;
+        height: fit-content;
+    }
+
+    .form-CTPNK{
+        display: flex;
+        justify-content:space-between;
+        margin-bottom: 20px;
+    }
+
+    .btn-them{
+        padding: 14px 20px;
+    }
+
+    p{
+        margin-bottom: 20px;
+    }
+
+    th{
+        background: #da8cff !important;
+        color: white;
+    }
+
+    .form-CTPNK .form-group{
+        width: 30%;
+        margin-bottom: 0 !important;
+    }
+
+    .card-title{
+        margin-bottom: 20px;
+    }
+
+    td a{
+        text-align: center;
+        text-decoration: none;
+    }
+
+    td,th {
+        text-align: center;
+    }
+    td:first-child{
+        text-align: left;
+    }
+</style>
+
+    <div>
+        <form class="forms-sample">
+            <div style="display: flex; margin-bottom: 20px">
+                <div class="card-body">
+                        <p style="font-size: 20pt">Phiếu nhập kho</p>
+                        <form class="forms-sample">
+                            <div class="form-group">
+                                <label for="exampleInputName1">Tên nhân viên</label>
+                                <input type="text" class="form-control" id="exampleInputName1">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail3">Mô tả</label>
+                                <input type="text" class="form-control" id="exampleInputEmail3">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword4">Thời gian</label>
+                                <input type="text" class="form-control" id="exampleInputPassword4">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputCity1">Trạng thái</label>
+                                <input type="text" class="form-control" id="exampleInputCity1">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleTextarea1">Tên nhà cung cấp</label>
+                                <input type="text" class="form-control" id="exampleInputName1">
+                            </div>
+                            <button type="submit" class="btn btn-gradient-success me-2">Lưu phiếu nhập kho</button>
+                        </form>
+                    </div>
+                <div style="width:75%; background: white; border-radius: 8px; margin-left: 20px; padding: 20px; height: fit-content;">
+                    <p style="font-size: 20pt">Chi tiết phiếu nhập kho</p>
+                    <form class="form-CTPNK" id="formThemChiTiet">
+                        <div class="form-group" >
+                            <label for="exampleInputName1">Tên sản phẩm</label>
+                            <input type="text" class="form-control" id="exampleInputName1">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail3">Số lượng</label>
+                            <input type="text" class="form-control" id="exampleInputEmail3">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword4">Đơn giá</label>
+                            <input type="text" class="form-control" id="exampleInputPassword4">
+                        </div>
+                        <button type="submit" class="btn btn-gradient-success me-2 btn-them">Thêm chi tiết phiếu nhập kho</button>
+                    </form>
+                    <p style="margin-top:20px">Danh sách chi tiết phiếu nhập kho</p>
+                    <div id="divDanhSachChiTiet">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th> Tên sản phẩm </th>
+                                    <th> Số lượng </th>
+                                    <th> Giá nhập </th>
+                                    <th> Tổng tiền </th>
+                                    <th>Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                     <td></td>
+                                     <td></td>
+                                     <td></td>
+                                     <td></td>
+                                     <td>
+                                        <a class="btn-danger" style="width: 55px; padding:10px 0; display: inline-block; margin: 5px; border-radius: 6px; cursor: pointer">Xoá</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>
+                                        <a class="btn-danger" style="width: 55px; padding:10px 0; display: inline-block; margin: 5px; border-radius: 6px; cursor: pointer">Xoá</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-gradient-success me-2">Lưu</button>
+        </form>
+    </div>
+
+
+

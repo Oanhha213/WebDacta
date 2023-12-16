@@ -1,0 +1,169 @@
+﻿@model DacTaWeb2.Models.Chitietpnk
+
+@{
+    ViewData["Title"] = "ThemChiTietPhieuNhapKho";
+    Layout = "~/Views/Shared/_LayoutNhapKho.cshtml";
+}
+
+<h1>ThemChiTietPNK</h1>
+
+<h4>Phieunhapkho</h4>
+@{
+    // Lấy thông tin phiếu nhập kho từ ViewBag
+    var phieuNhapKho = ViewBag.PhieuNhapKho as DacTaWeb2.Models.Phieunhapkho;
+}
+
+<div>
+    <h4>Thông tin Phiếu Nhập Kho</h4>
+    <dl class="row">
+        <dt class="col-sm-2">
+            Nhà cung cấp
+        </dt>
+        <dd class="col-sm-10">
+            @phieuNhapKho?.IdNcc
+        </dd>
+        <dt class="col-sm-2">
+            Nhân viên
+        </dt>
+        <dd class="col-sm-10">
+            @phieuNhapKho?.IdNv
+        </dd>
+        <dt class="col-sm-2">
+            Thời gian
+        </dt>
+        <dd class="col-sm-10">
+            @phieuNhapKho?.Thoigian
+        </dd>
+        <dt class="col-sm-2">
+            Trạng thái
+        </dt>
+        <dd class="col-sm-10">
+            @phieuNhapKho?.Trangthai
+        </dd>
+        <dt class="col-sm-2">
+            Mô tả
+        </dt>
+        <dd class="col-sm-10">
+            @phieuNhapKho?.Mota
+        </dd>
+        <!-- Thêm các thông tin khác của phiếu nhập kho tương tự -->
+    </dl>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="ThemChiTietPNK" asp-route-id="@phieuNhapKho?.IdPnk" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="IdSp" class="control-label"></label>
+                <select asp-for="IdSp" class="form-control" asp-items="@ViewBag.SanPhams"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Soluong" class="control-label"></label>
+                <input asp-for="Soluong" class="form-control" />
+                <span asp-validation-for="Soluong" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GiaNhap" class="control-label"></label>
+                <input asp-for="GiaNhap" class="form-control" />
+                <span asp-validation-for="GiaNhap" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <button type="button" class="btn btn-primary" onclick="ThemChiTiet()">Thêm Chi Tiết Phiếu Nhập Kho</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <h4>Danh Sách Chi Tiết Phiếu Nhập Kho</h4>
+    <hr />
+    <table class="table table-bordered" id="tblDanhSachChiTiet">
+        <thead>
+            <tr>
+                <th> Tên sản phẩm </th>
+                <th> Số lượng </th>
+                <th> Giá nhập </th>
+                <th> Tổng tiền </th>
+                <th> Thao tác </th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Danh sách chi tiết phiếu nhập kho sẽ được hiển thị ở đây -->
+        </tbody>
+    </table>
+</div>
+<div>
+    <button type="button" class="btn btn-success" onclick="LuuChiTiet()">Lưu Chi Tiết Phiếu Nhập Kho</button>
+    <a asp-action="Index">Quay lại</a>
+</div>
+<script>
+    // Mảng lưu trữ các chi tiết phiếu nhập kho
+    var danhSachChiTiet = [];
+
+    // Hàm thêm chi tiết phiếu nhập kho
+    function ThemChiTiet() {
+        var tenSanPham = $("#IdSp option:selected").text();
+        var soLuong = $("#Soluong").val();
+        var giaNhap = $("#GiaNhap").val();
+        var tongTien = soLuong * giaNhap;
+
+        // Thêm vào danh sách chi tiết
+        danhSachChiTiet.push({
+            TenSanPham: tenSanPham,
+            SoLuong: soLuong,
+            GiaNhap: giaNhap,
+            TongTien: tongTien
+        });
+
+        // Hiển thị trong bảng
+        var row = "<tr><td>" + tenSanPham + "</td><td>" + soLuong + "</td><td>" + giaNhap + "</td><td>" + tongTien + "</td><td><button type='button' class='btn btn-danger' onclick='XoaChiTiet(" + (danhSachChiTiet.length - 1) + ")'>Xoá</button></td></tr>";
+        $("#tblDanhSachChiTiet tbody").append(row);
+
+        // Clear các ô nhập
+        $("#IdSp").val("");
+        $("#Soluong").val("");
+        $("#GiaNhap").val("");
+    }
+
+    // Hàm xoá chi tiết phiếu nhập kho
+    function XoaChiTiet(index) {
+        // Xoá khỏi danh sách
+        danhSachChiTiet.splice(index, 1);
+
+        // Refresh bảng
+        HienThiDanhSach();
+    }
+
+    // Hàm hiển thị danh sách chi tiết
+    function HienThiDanhSach() {
+        // Xoá hết dữ liệu cũ
+        $("#tblDanhSachChiTiet tbody").empty();
+
+        // Hiển thị lại từ danh sách mới
+        for (var i = 0; i < danhSachChiTiet.length; i++) {
+            var chiTiet = danhSachChiTiet[i];
+            var row = "<tr><td>" + chiTiet.TenSanPham + "</td><td>" + chiTiet.SoLuong + "</td><td>" + chiTiet.GiaNhap + "</td><td>" + chiTiet.TongTien + "</td><td><button type='button' class='btn btn-danger' onclick='XoaChiTiet(" + i + ")'>Xoá</button></td></tr>";
+            $("#tblDanhSachChiTiet tbody").append(row);
+        }
+    }
+
+    // Hàm lưu chi tiết phiếu nhập kho
+    function LuuChiTiet() {
+        // Gửi danh sách chi tiết lên server
+        $.ajax({
+            type: "POST",
+            url: "/ThemChiTietPhieuNhapKho/@phieuNhapKho.IdPnk", // Đường dẫn đến action trong controller
+            data: { chiTietPNKs: danhSachChiTiet }, // Dữ liệu gửi lên server
+            success: function (result) {
+                // Xử lý kết quả sau khi lưu thành công
+                alert("Lưu chi tiết thành công");
+                // Có thể thực hiện các công việc cần thiết sau khi lưu, chẳng hạn chuyển hướng trang
+            },
+            error: function (error) {
+                // Xử lý khi gặp lỗi
+                alert("Lỗi khi lưu chi tiết");
+            }
+        });
+    }
+</script>
